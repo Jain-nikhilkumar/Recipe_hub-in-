@@ -28,6 +28,8 @@ urlpatterns = [
     path("sucess_page",sucess_page,name="sucess_page"),
     path("admin/", admin.site.urls),
     path('delete/<int:id>/', views.delete_recipe, name='delete_recipe'),
+    path('update/<int:id>/', views.update_recipe, name='update_recipe'),
+    # path('receipes/', views.receipe_list, name='receipe_list'),
 ]
 
 if settings.DEBUG:
