@@ -85,6 +85,34 @@
             <button type="submit" class="btn btn-primary">Add Recipe</button>
           </div>
         </form>
+        <!-- Recipe List -->
+      <div class="recipe-grid">
+        <h2 class="text-primary mb-4 text-center">All Recipes</h2>
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+          {% for recipe in Receipes %}
+          <div class="col">
+            <div class="card h-100">
+              <img
+                src="{{ recipe.receipe_image.url }}"
+                class="card-img-top"
+                alt="Image of {{ recipe.receipe_name }}"
+                style="height: 200px; object-fit: cover;"
+              />
+              <div class="card-body">
+                <h5 class="card-title recipe-title">{{ recipe.receipe_name }}</h5>
+                <p class="card-text recipe-desc">{{ recipe.receipe_description }}</p>
+              </div>
+              <div class="card-body">
+                <div class="d-flex justify-content-between">
+                  <a href="{% url 'delete_recipe' recipe.id %}" class="btn btn-danger btn-sm">
+                    Delete
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
       </div>
     </div>
 

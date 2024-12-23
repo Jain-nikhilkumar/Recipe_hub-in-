@@ -1,9 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from .models import Receipe
+from django.shortcuts import get_object_or_404
+
 # Create your views here.
 def receipe(request):
     if request.method == "POST":
-        
         data=request.POST 
         print(data)
         
@@ -19,5 +20,15 @@ def receipe(request):
             receipe_description=receipe_description,
             receipe_image=receipe_image
         )
+        return redirect('/receipes')
         
-    return render(request, 'receipe.html')
+    queryset=Receipe.objects.all()
+    context={
+        'Receipes':queryset
+    }
+    return render(request, 'receipe.html',context)
+
+def delete_recipe(request, id):
+    recipe = get_object_or_404(Receipe, id=id)
+    recipe.delete()
+    return redirect('/receipes')
