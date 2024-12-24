@@ -23,13 +23,17 @@ from django.conf import settings
 from django.conf.urls.static import static
 from vege  import views
 urlpatterns = [
-    path("" , home,name='home' ),
+    path("" , views.login_page,name='home' ),
     path("receipes/", receipe,name='receipe'),
     path("sucess_page",sucess_page,name="sucess_page"),
     path("admin/", admin.site.urls),
     path('delete/<int:id>/', views.delete_recipe, name='delete_recipe'),
     path('update/<int:id>/', views.update_recipe, name='update_recipe'),
     # path('receipes/', views.receipe_list, name='receipe_list'),
+    path('login/', views.login_page, name='login_page'),
+    path('logout', views.logout, name='logout'),
+    path('signup/', views.signup, name='signup_page'),
+    path('add_receipe/', views.add_recipe, name='add_recipe'),
 ]
 
 if settings.DEBUG:

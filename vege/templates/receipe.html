@@ -11,9 +11,17 @@
         crossorigin="anonymous"
       />
       <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+      <link
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
     rel="stylesheet"
   />
+  <link
+  href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+  rel="stylesheet"
+/>
       <style>
         body {
           background-color: #f8f9fa;
@@ -22,10 +30,14 @@
         .container {
           margin-top: 5rem;
         }
+
         .card {
-          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-          border-radius: 10px;
-        }
+          margin-left:30px;
+          height: 200px
+          padding: 10px;
+        object-fit: cover;
+      
+          }
         .header-image {
           width: 100%;
           border-radius: 10px;
@@ -44,10 +56,59 @@
             justify-content: center;
             align-items: center;
           }
-        
+          .recipe-grid {
+            margin-top: 3rem;
+          }
+
+          body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        .navbar {
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+      .navbar-brand {
+        font-size: 1.5rem;
+        font-weight: bold;
+      }
+        }
       </style>
     </head>
     <body>
+      
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Receipe Book.io</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link active" href="/receipes">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/add_receipe">Add Recipe</a>
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link btn btn-light btn-sm text-primary ms-2"
+                href="/login"
+                >Logout</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
       <div class="container mt-4">
         <form method="GET" class="d-flex justify-content-center">
           <div class="input-group w-50">
@@ -55,7 +116,7 @@
                   type="text"
                   name="search"
                   class="form-control"
-                  placeholder="Search recipes by name or description..."
+                  placeholder="Search recipes by name ..."
                   value="{{ query|default:'' }}"
               />
               <button class="btn btn-primary" type="submit">
@@ -65,65 +126,10 @@
       </form>
       
       </div>
-      
-      <div class="container">
-        <div class="text-center mb-5">
-          <h1 class="fw-bold text-primary">Recipe Manager</h1>
-          <p class="text-secondary">
-            Add your favorite recipes and manage them effortlessly!
-          </p>
-        </div>
+  
 
-        <div class="row justify-content-center">
-          <form
-            class="col-md-6 card p-4 bg-white"
-            method="POST"
-            enctype="multipart/form-data"
-          >
-            {% csrf_token %}
-            <h3 class="text-center text-primary mb-4">Add New Recipe</h3>
-
-            <div class="mb-3">
-              <label for="recipeName" class="form-label">Recipe Name</label>
-              <input
-                type="text"
-                name="recipeName"
-                class="form-control"
-                id="recipeName"
-                placeholder="Enter recipe name"
-              />
-            </div>
-
-            <div class="mb-3">
-              <label for="recipeDescription" class="form-label"
-                >Recipe Description</label
-              >
-              <textarea
-                class="form-control"
-                name="recipeDescription"
-                id="recipeDescription"
-                rows="3"
-                placeholder="Enter a brief description of the recipe"
-              ></textarea>
-            </div>
-
-            <div class="mb-3">
-              <label for="recipeImage" class="form-label">Recipe Image</label>
-              <input
-                name="receipeimage"
-                type="file"
-                class="form-control"
-                id="recipeImage"
-              />
-            </div>
-
-            <div class="d-grid">
-              <button type="submit" class="btn btn-primary">Add Recipe</button>
-            </div>
-          </form>
-          <!-- Recipe List -->
-        <div class="recipe-grid">
-          <h2 class="text-primary mb-4 text-center mt-3">All Recipes</h2>
+<div class="recipe-grid">
+          <h2 class="text-primary mb-2 text-center mt-2">All Recipes</h2>
           <div class="row row-cols-1 row-cols-md-3 g-4">
             {% for recipe in Receipes %}
             <div class="col">
