@@ -5,6 +5,9 @@ from django.db.models import Q
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import authenticate, login,logout
+from django.contrib.auth.decorators import login_required
+
+
 def login_page(request):
     if request.method == "POST":
         data = request.POST
@@ -26,6 +29,8 @@ def logout(request):
     logout(request)
     return redirect('/login')
 
+
+@login_required(login_url='/login/')
 def receipe(request):
     if request.method == "POST":
         data=request.POST 
@@ -84,7 +89,7 @@ def signup(request):
         
     return render(request, 'signup.html')
 
-
+@login_required(login_url='/login/')
 def add_recipe(request):
     if request.method == "POST":
         data=request.POST 
@@ -116,6 +121,7 @@ def add_recipe(request):
     } 
     return render(request, 'add_receipe.html',context)
 
+@login_required(login_url='/login/')
 def delete_recipe(request, id):
     recipe = get_object_or_404(Receipe, id=id)
     recipe.delete()
@@ -124,6 +130,7 @@ def delete_recipe(request, id):
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Receipe
 
+@login_required(login_url='/login/')
 def update_recipe(request, id):
     # Fetch the recipe object from the database
     recipe = get_object_or_404(Receipe, id=id)
